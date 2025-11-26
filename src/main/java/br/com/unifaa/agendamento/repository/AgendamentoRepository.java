@@ -1,5 +1,6 @@
 package br.com.unifaa.agendamento.repository;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,4 +19,10 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> 
     Optional<Agendamento> findByUserIdAndProvaId(Long userId, Long provaId);
 
     List<Agendamento> findByPoloId(Long poloId);
+
+    boolean existsByUserIdAndProvaId(Long userId, Long provaId);
+
+    List<Agendamento> findByUserIdAndProva_InicioAfter(Long userId, Instant now);
+
+    List<Agendamento> findByUserIdAndProva_InicioBefore(Long userId, Instant now);
 }

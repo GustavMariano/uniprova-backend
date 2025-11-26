@@ -1,5 +1,6 @@
 package br.com.unifaa.agendamento.repository;
 
+import java.time.Instant;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,4 +11,10 @@ import br.com.unifaa.agendamento.model.Professor;
 @Repository
 public interface ProfessorRepository extends JpaRepository<Professor, Long> {
     Optional<Professor> findByEmail(String email);
+
+    boolean existsByEmail(String email);
+
+    long countByStatus(String status);
+
+    long countByStatusAndCriadoEmAfter(String status, Instant criadoEmAfter);
 }

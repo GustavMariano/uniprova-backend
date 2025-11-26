@@ -2,8 +2,6 @@ package br.com.unifaa.agendamento.model;
 
 import java.time.Instant;
 
-import org.hibernate.annotations.CreationTimestamp;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -41,7 +39,6 @@ public class Agendamento {
     @JoinColumn(name = "polo_id", nullable = false)
     private Polo polo;
 
-    @CreationTimestamp
     @Column(name = "data_agendamento", nullable = false, updatable = false)
     private Instant dataAgendamento;
 

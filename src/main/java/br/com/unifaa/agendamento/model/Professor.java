@@ -33,6 +33,15 @@ public class Professor {
     @Column(nullable = false, unique = true, length = 255)
     private String email;
 
+    @Column(nullable = false, unique = true, length = 11)
+    private String telefone;
+
+    @Column(nullable = false, length = 255)
+    private String status;
+
+    @Column(nullable = false, length = 255)
+    private String departamento;
+
     @CreationTimestamp
     @Column(name = "criado_em", nullable = false, updatable = false)
     private Instant criadoEm;
