@@ -10,4 +10,5 @@ import br.com.unifaa.agendamento.model.Sala;
 @Repository
 public interface SalaRepository extends JpaRepository<Sala, Long> {
     List<Sala> findByPoloId(Long poloId);
+    boolean existsByPoloIdAndNome(Long poloId, String nome);
 }

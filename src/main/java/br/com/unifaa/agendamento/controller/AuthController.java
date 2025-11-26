@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.unifaa.agendamento.dto.AuthResponseDto;
 import br.com.unifaa.agendamento.dto.LoginRequestDto;
+import br.com.unifaa.agendamento.dto.LoginResponseDto;
 import br.com.unifaa.agendamento.dto.RegisterRequestDto;
 import br.com.unifaa.agendamento.service.UserService;
 import jakarta.validation.Valid;
@@ -26,7 +27,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponseDto> login(@Valid @RequestBody LoginRequestDto req) {
+    public ResponseEntity<LoginResponseDto> login(@Valid @RequestBody LoginRequestDto req) {
         return ResponseEntity.ok(userService.login(req));
     }
 }

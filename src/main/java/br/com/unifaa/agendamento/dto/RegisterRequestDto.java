@@ -19,4 +19,7 @@ public class RegisterRequestDto {
 
     @NotNull
     private Long poloId;
+
+    @NotNull
+    private Long cursoId;
 }

@@ -15,15 +15,15 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtUtil {
 
-    private static final String SECRET = "super_secret_key_123456789_super_secret_key_123456789";
+    private static final String SECRET = "8Zz5tw0Ionm3XPZZfN0NOml3z9FMfmpgXwovR9fp6ryDIoGRM8EPHAB6iHsc0fb";
     private static final long EXPIRATION_MS = 1000 * 60 * 60 * 4;
 
     private final SecretKey key = Keys.hmacShaKeyFor(SECRET.getBytes());
 
     public String generateToken(String subject, Map<String, Object> claims) {
         return Jwts.builder()
-                .setSubject(subject)
                 .setClaims(claims)
+                .setSubject(subject)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_MS))
                 .signWith(key, SignatureAlgorithm.HS256)

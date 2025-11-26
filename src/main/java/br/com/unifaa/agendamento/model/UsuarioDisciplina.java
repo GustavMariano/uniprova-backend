@@ -14,12 +14,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "usuario_disciplina")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class UsuarioDisciplina {
@@ -37,7 +39,7 @@ public class UsuarioDisciplina {
     private User user;
 
     @Column(name = "cursando_disciplina")
-    private Boolean cursandoDisciplina = false;
+    private boolean cursandoDisciplina;
 
     @CreationTimestamp
     @Column(name = "criado_em", nullable = false, updatable = false)

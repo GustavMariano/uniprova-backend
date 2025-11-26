@@ -44,6 +44,9 @@ public class Sala {
     @Column(columnDefinition = "TEXT")
     private String recursos;
 
+    @Column(nullable = false, length = 255)
+    private String status;
+
     @CreationTimestamp
     @Column(name = "criado_em", nullable = false, updatable = false)
     private Instant criadoEm;
