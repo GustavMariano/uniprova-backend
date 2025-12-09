@@ -1,22 +1,12 @@
 package br.com.unifaa.agendamento.model;
 
-import java.time.Instant;
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.UuidGenerator;
 
-import org.hibernate.annotations.CreationTimestamp;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
@@ -27,26 +17,32 @@ import lombok.NoArgsConstructor;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @UuidGenerator
+    @Column(columnDefinition = "UUID")
+    private UUID id;
 
-    @Column(length = 255)
-    private String nome;
-
-    @Column(nullable = false, unique = true, length = 255)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false, length = 255)
-    private String senha;
+    @Column(nullable = false, length = 512)
+    private String password;
 
-    @Column(nullable = false, length = 50)
-    private String role;
+    @Column(nullable = false)
+    private String fullName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "polo_id", nullable = false)
-    private Polo polo;
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 
-    @CreationTimestamp
-    @Column(name = "criado_em", nullable = false, updatable = false)
-    private Instant criadoEm;
+    @ManyToOne
+    @JoinColumn(name = "campus_id")
+    private Campus campus;
+
+    @Column(nullable = false)
+    private Boolean enabled = true;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    @Builder.Default
+    private Set<Role> roles = new HashSet<>();
 }

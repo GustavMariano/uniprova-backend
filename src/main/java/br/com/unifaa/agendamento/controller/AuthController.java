@@ -1,33 +1,29 @@
 package br.com.unifaa.agendamento.controller;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import br.com.unifaa.agendamento.dto.AuthResponseDto;
-import br.com.unifaa.agendamento.dto.LoginRequestDto;
-import br.com.unifaa.agendamento.dto.LoginResponseDto;
-import br.com.unifaa.agendamento.dto.RegisterRequestDto;
-import br.com.unifaa.agendamento.service.UserService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+import br.com.unifaa.agendamento.dto.request.AuthRequestDto;
+import br.com.unifaa.agendamento.dto.request.RegisterRequestDto;
+import br.com.unifaa.agendamento.dto.response.AuthResponseDto;
+import br.com.unifaa.agendamento.dto.response.RegisterResponseDto;
+import br.com.unifaa.agendamento.service.AuthService;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
 
-    private final UserService userService;
+    private final AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponseDto> register(@Valid @RequestBody RegisterRequestDto req) {
-        return ResponseEntity.ok(userService.register(req));
+    public RegisterResponseDto register(@RequestBody RegisterRequestDto req) {
+        return authService.register(req);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDto> login(@Valid @RequestBody LoginRequestDto req) {
-        return ResponseEntity.ok(userService.login(req));
+    public AuthResponseDto login(@RequestBody AuthRequestDto req) {
+        return authService.login(req);
     }
 }
+
